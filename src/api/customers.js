@@ -6,8 +6,8 @@ const customers = require('express').Router();
 
 customers.get('/', (req, res) => {
   const params = {
-    page_size: req.params.page_size || 10,
-    offset: req.params.offset || 0,
+    page_size: req.query.page_size || 10,
+    offset: req.query.offset || 0,
   }
 
   res.json(
