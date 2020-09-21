@@ -1,11 +1,14 @@
 Mark Hario Sample Api
 =====================
+Software required: Git, Node.js.
 
+Run:
 
 ```sh
-  npm install && npm run build && npm run start
+  npm install && npm run build && npm start
 ```
 
+Runs on port 8080 by default. To change: update final command to "PORT=8085 npm start"
 
 ## Endpoints
 
