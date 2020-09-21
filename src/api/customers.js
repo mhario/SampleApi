@@ -15,6 +15,12 @@ customers.get('/', (req, res) => {
   );
 });
 
+customers.get('/:id', (req, res) => {
+  res.json(
+    CustomersModel.find( customer => +customer._id === +req.params.id )
+  );
+});
+
 customers.post('/add', (req, res) => {
   const newCustomer = req.body;
 
@@ -32,7 +38,7 @@ customers.post('/add', (req, res) => {
       JSON.stringify(newFile), err => {
         if (err) throw err;
         CustomersModel = newFile;
-        res.sendStatus(201);
+        res.json( newCustomer );
       }
     );
   }
@@ -52,7 +58,7 @@ customers.delete('/:id', (req, res) => {
     JSON.stringify(newFile), err => {
       if (err) throw err;
       CustomersModel = newFile;
-      res.sendStatus(201);
+      res.sendStatus(204);
     }
   );
 });
@@ -70,7 +76,7 @@ customers.put('/:id', (req, res) => {
     path.join( __dirname, '../models/customers.json'),
     JSON.stringify(CustomersModel), err => {
       if (err) throw err;
-      res.sendStatus(201);
+      res.json(customer);
     }
   );
 });

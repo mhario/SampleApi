@@ -30,7 +30,7 @@ agents.post('/add', (req, res) => {
 });
 
 agents.get('/:id', (req, res) => {
-  res.json( AgentsModel.find(agent => agent._id === req.body.id ));
+  res.json( AgentsModel.find(agent => +agent._id === +req.params.id ));
 });
 
 agents.put('/:id', (req,res) => {
@@ -43,10 +43,9 @@ agents.put('/:id', (req,res) => {
     path.join( __dirname, '../models/agents.json'),
     JSON.stringify(AgentsModel), err => {
       if (err) throw err;
-      res.sendStatus(201);
+      res.json( agent );
     }
   );
-  res.send(agent)
 });
 
 function _mapCityState(address) {
