@@ -1,14 +1,10 @@
 import { version } from '../../package.json';
 import { Router } from 'express';
-import facets from './facets';
 const agents = require('./agents');
 const customers = require('./customers');
 
-export default ({ config, db }) => {
+export default () => {
 	let api = Router();
-
-	// mount the facets resource
-	api.use('/facets', facets({ config, db }));
 
 	//
 	// Test end points

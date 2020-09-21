@@ -1,7 +1,7 @@
 {
   "name": "apitest",
   "version": "0.3.0",
-  "description": "Starter project for an ES6 RESTful Express API",
+  "description": "Mark Hario Sample API work",
   "main": "dist",
   "scripts": {
     "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/developit/express-es6-rest-api.git"
+    "url": "git@github.com:mhario/SampleApi.git"
   },
   "author": "Jason Miller <jason@developit.ca>",
   "license": "MIT",
@@ -46,8 +46,5 @@
     "eslint": "^3.1.1",
     "nodemon": "^1.9.2"
   },
-  "bugs": {
-    "url": "https://github.com/developit/express-es6-rest-api/issues"
-  },
-  "homepage": "https://github.com/developit/express-es6-rest-api#readme"
+  "homepage": "https://github.com/mhario/SampleApi"
 }

@@ -20,7 +20,7 @@ agents.post('/add', (req, res) => {
     const newFile = AgentsModel.concat(newAgent);
     fs.writeFile(
       path.join( __dirname, '../models/agents.json'),
-      JSON.stringify(newFile), (err,data) => {
+      JSON.stringify(newFile), err => {
         if (err) throw err;
         AgentsModel = newFile;
         res.sendStatus(201);
@@ -41,9 +41,8 @@ agents.put('/:id', (req,res) => {
 
   fs.writeFile(
     path.join( __dirname, '../models/agents.json'),
-    JSON.stringify(newFile), (err,data) => {
+    JSON.stringify(AgentsModel), err => {
       if (err) throw err;
-      AgentsModel = newFile;
       res.sendStatus(201);
     }
   );
@@ -51,9 +50,9 @@ agents.put('/:id', (req,res) => {
 });
 
 function _mapCityState(address) {
-  const [street, city, state, fourDigitZipLol ] = address.split(',');
+  const [ street, city, state ] = address.split(',');
   return `${ city.trim() }, ${ state }`;
-};
+}
 
 agents.get('/:id/customers', (req,res) => {
   const agent = AgentsModel.find(agent => +agent._id === +req.params.id);

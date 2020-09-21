@@ -5,7 +5,6 @@ const path = require('path');
 const customers = require('express').Router();
 
 customers.get('/', (req, res) => {
-
   const params = {
     page_size: req.params.page_size || 10,
     offset: req.params.offset || 0,
@@ -19,7 +18,7 @@ customers.get('/', (req, res) => {
 customers.post('/add', (req, res) => {
   const newCustomer = req.body;
 
-  const requiredFields = ['agent_id', 'isActive', 'balance', 'name', 'email', 'phone', 'registered'];
+  const requiredFields = ['agent_id', 'isActive', 'name', 'email', 'registered'];
   const missingField = requiredFields.find(field => ! newCustomer.hasOwnProperty(field) );
 
   if( missingField ) {
@@ -30,7 +29,7 @@ customers.post('/add', (req, res) => {
 
     fs.writeFile(
       path.join( __dirname, '../models/customers.json'),
-      JSON.stringify(newFile), (err,data) => {
+      JSON.stringify(newFile), err => {
         if (err) throw err;
         CustomersModel = newFile;
         res.sendStatus(201);
@@ -50,7 +49,7 @@ customers.delete('/:id', (req, res) => {
 
   fs.writeFile(
     path.join( __dirname, '../models/customers.json'),
-    JSON.stringify(newFile), (err,data) => {
+    JSON.stringify(newFile), err => {
       if (err) throw err;
       CustomersModel = newFile;
       res.sendStatus(201);
@@ -69,7 +68,7 @@ customers.put('/:id', (req, res) => {
 
   fs.writeFile(
     path.join( __dirname, '../models/customers.json'),
-    JSON.stringify(CustomersModel), (err,data) => {
+    JSON.stringify(CustomersModel), err => {
       if (err) throw err;
       res.sendStatus(201);
     }
