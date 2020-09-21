@@ -1,55 +1,44 @@
-Express & ES6 REST API Boilerplate
-==================================
+Mark Hario Sample Api
+=====================
 
-This is a straightforward boilerplate for building REST APIs with ES6 and Express.
-
-- ES6 support via [babel](https://babeljs.io)
-- REST resources as middleware via [resource-router-middleware](https://github.com/developit/resource-router-middleware)
-- CORS support via [cors](https://github.com/troygoode/node-cors)
-- Body Parsing via [body-parser](https://github.com/expressjs/body-parser)
-
-> Tip: If you are using [Mongoose](https://github.com/Automattic/mongoose), you can automatically expose your Models as REST resources using [restful-mongoose](https://git.io/restful-mongoose).
-
-
-
-Getting Started
----------------
 
 ```sh
-# clone it
-git clone git@github.com:developit/express-es6-rest-api.git
-cd express-es6-rest-api
-
-# Make it your own
-rm -rf .git && git init && npm init
-
-# Install dependencies
-npm install
-
-# Start development live-reload server
-PORT=8080 npm run dev
-
-# Start production server:
-PORT=8080 npm start
+  npm install && npm run build && npm run start
 ```
-Docker Support
-------
-```sh
-cd express-es6-rest-api
 
-# Build your docker
-docker build -t es6/api-service .
-#            ^      ^           ^
-#          tag  tag name      Dockerfile location
 
-# run your docker
-docker run -p 8080:8080 es6/api-service
-#                 ^            ^
-#          bind the port    container tag
-#          to your host
-#          machine port   
+## Endpoints
 
-```
+| __localhost:8080/api/agents__    
+| Method | url      | Notes        
+|:-------|:---------|:---
+| GET    | /all     | Returns all agents
+| POST   | /add     | All fields required
+| GET    | /{id}    |              
+| PUT    | /{id}    | All body fields added to record (no schema validation). Returns record.
+
+|  __localhost:8080/api/customers__
+| Method | url      | Notes
+|:-------|:---------|:--
+| GET    | /        | Query string defaults: ?page_size=10&offset=0
+| GET    | /{id}    |
+| POST   | /add     | Required fields: agent_id, isActive, name, email, registered
+| DELETE | /{id}    | Actual delete (for now)
+| PUT    | /{id}    | All body fields added to record (no schema validation). Returns record.  
+
+
+
+## Assumptions
+- Customers should have pagination and default limit of 10 records.
+- Creating a new agent should (?) require all the fields.
+- Creating a new customer may need empty fields, based on available information.
+
+## Questions
+- Who should be authorized to edit these records? Should there be restrictions on viewing customers?
+- Record creation / required fields ?
+- Should "Delete customer" actually be interpreted as "set to inactive?"
+- What sort of filters would we like on our Customers (or agents) GET requests?
+
 
 License
 -------
